@@ -17,15 +17,19 @@ const Login = () => {
 
     //======handling Notification for user =====//
     const handleTostify = async () => {
-        await responseData.success && setIsNewUser(!isNewUser);
-        toast(responseData.message, {
-            autoClose: 2000,
-        });
+        if (responseData.success) {
+            setIsNewUser(!isNewUser);
+            toast(responseData.message, {
+                autoClose: 2000,
+            });
+        }
     };
 
     useEffect(() => {
-        isFormSubmit && handleTostify();
-        setIsformSubmit(false);
+        if (isFormSubmit) {
+            handleTostify();
+            setIsformSubmit(false);
+        }
     }, [responseData]);
 
     useEffect(() => {
@@ -71,13 +75,15 @@ const Login = () => {
                                     </u>
                                 </p>
 
-                                <p className="content text-center font-heading text-black mt-4">
-                                    <u className='ml-1 border-brand-blue text-brand-blue cursor-pointer'
-                                        onClick={handleForgotPasswordClick}
-                                    >
-                                        Forgot Password?
-                                    </u>
-                                </p>
+                                {isNewUser && (
+                                    <p className="content text-center font-heading text-black mt-4">
+                                        <u className='ml-1 border-brand-blue text-brand-blue cursor-pointer'
+                                            onClick={handleForgotPasswordClick}
+                                        >
+                                            Forgot Password?
+                                        </u>
+                                    </p>
+                                )}
 
                                 <OAuth />
                                 <ToastContainer limit={0} />

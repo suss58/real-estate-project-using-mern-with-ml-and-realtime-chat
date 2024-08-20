@@ -26,43 +26,6 @@ const listingSchema = new mongoose.Schema(
       required: true,
       type: Number,
     },
-
-    living: {
-      required: true,
-      type: Number,
-    },
-
-    BHK: {
-      required: true,
-      type: Number,
-    },
-
-    builtyear: {
-      required: true,
-      type: Number,
-    },
-
-    Yourarea: {
-      required: true,
-      type: String,
-    },
-
-    condition: {
-      required: true,
-      type: Number,
-    },
-
-    housetype: {
-      required: true,
-      type: String,
-    },
-    direction: {
-      required: true,
-      type: String,
-    },
-
-
-
     price: {
       required: true,
       type: Number,
@@ -76,7 +39,7 @@ const listingSchema = new mongoose.Schema(
     },
     parking: {
       required: true,
-      type: Number,
+      type: Boolean,
     },
     type: {
       type: String,
@@ -94,18 +57,6 @@ const listingSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    location: {
-      // This will store the latitude and longitude as an object
-      lat: {
-        type: Number,
-        required: true,
-      },
-      lng: {
-        type: Number,
-        required: true,
-      },
-    },
-
   },
   { timestamps: true }
 );

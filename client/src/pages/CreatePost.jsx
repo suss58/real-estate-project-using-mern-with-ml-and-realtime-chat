@@ -1,12 +1,10 @@
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { firebaseApp } from '../firebase';
 import { ToastContainer, toast } from 'react-toastify';
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import MapComponent from "../components/MapComponent";
-
 
 const CreatePost = () => {
 
@@ -26,18 +24,13 @@ const CreatePost = () => {
 
 
     const navigate = useNavigate()
-    const { register, handleSubmit, getValues, formState: { errors } } = useForm({
+
+
+    const { register, handleSubmit, getValues,  formState: { errors } } = useForm({
         mode: "onChange"
     });
 
 
-
-    const [location, setLocation] = useState({ lat: null, lng: null });
-    const handleLocationSelect = (selectedLocation) => {
-        setLocation(selectedLocation);
-    };
-
-    const [prediction, setPrediction] = useState(null);
 
 
 
@@ -110,7 +103,6 @@ const CreatePost = () => {
                 body: JSON.stringify({
                     ...data,
                     imgUrl: formData.imgUrl,
-                    location: location,
                     userRef: currentUser._id
                 })
             })
@@ -133,42 +125,6 @@ const CreatePost = () => {
             setFormSubmitLoading(false)
         }
     }
-
-
-
-    const handlePredict = async () => {
-        const predictionData = {
-            Land_area: watch('Land_area'),
-            Bedroom: watch('Bedroom'),
-            Bathroom: watch('Bathroom'),
-            No_of_Flat: watch('No_of_Flat'),
-            Living_Room: watch('Living_Room'),
-            Kitchen: watch('Kitchen'),
-            Road_size: watch('Road_size'),
-            Built_year: watch('Built_year'),
-            Parking: watch('Parking'),
-            Balcony: watch('Balcony'),
-            OverallCondition: watch('OverallCondition'),
-            District: watch('District'),
-            Direction: watch('Direction'),
-            House_type: watch('House_type')
-        };
-
-        try {
-            const response = await fetch('http://localhost:3000/api/predict', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": 'application/json'
-                },
-                body: JSON.stringify(predictionData)
-            });
-            const data = await response.json();
-            setPrediction(data.prediction);
-        } catch (error) {
-            toast.error('Error making prediction:', { autoClose: 2000 });
-        }
-    };
-
 
 
 
@@ -307,148 +263,23 @@ const CreatePost = () => {
                                                     {errors.bath && <p className='text-red-700 text-xs font-semibold'>{errors.bath.message}</p>}
                                                 </div>
                                             </div>
-
-                                            <div className="max-w-[200px] mt-1">
-                                                <label htmlFor="living" className="block text-sm font-medium text-gray-700 mb-1">Living Rooms</label>
-                                                <input
-                                                    defaultValue={1}
-                                                    className='border-[1px] border-gray-300 focus:border-brand-blue rounded-md bg-white placeholder:text-sm p-2 w-full'
-                                                    min={1}
-                                                    max={10}
-                                                    type="number"
-                                                    name="living"
-                                                    id="living"
-                                                    {...register('living', { required: 'This field is required*' })}
-                                                />
-                                                {errors.living && <p className='text-red-700 text-xs font-semibold mt-1'>{errors.living.message}</p>}
-                                            </div>
-
-
-                                            <div className="max-w-[200px] mt-2">
-                                                <label htmlFor="BHK" className="block text-sm font-medium text-gray-700 mb-1">Total BHK</label>
-                                                <input
-                                                    defaultValue={1}
-                                                    className='border-[1px] border-gray-300 focus:border-brand-blue rounded-md bg-white placeholder:text-sm p-2 w-full'
-                                                    min={1}
-                                                    max={10}
-                                                    type="number"
-                                                    name="BHK"
-                                                    id="BHK"
-                                                    {...register('BHK', { required: 'This field is required*' })}
-                                                />
-                                                {errors.No_of_Flat && <p className='text-red-700 text-xs font-semibold mt-1'>{errors.No_of_Flat.message}</p>}
-                                            </div>
-
-
-                                            <div className="max-w-[200px] mt-2">
-                                                <label htmlFor="builtyear" className="block text-sm font-medium text-gray-700 mb-1">Built year</label>
-                                                <input
-                                                    className='border-[1px] border-gray-300 focus:border-brand-blue rounded-md bg-white placeholder:text-sm p-2 w-full'
-                                                    defaultValue={2060}
-                                                    type="number"
-                                                    name="builtyear"
-                                                    id="builtyear"
-                                                    {...register('builtyear', { required: 'This field is required*' })}
-                                                />
-                                                {errors.builtyear && <p className='text-red-700 text-xs font-semibold mt-1'>{errors.builtyear.message}</p>}
-                                            </div>
-
-
-                                            <div className="max-w-[200px] mt-2">
-                                                <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">Select Your area</label>
-                                                <select
-                                                    className='border-[1px] border-gray-300 focus:border-brand-blue rounded-md bg-white placeholder:text-sm p-2 w-full'
-                                                    name="Yourarea"
-                                                    id="Yourarea"
-                                                    {...register('Yourarea', { required: 'This field is required*' })}
-                                                >
-                                                    <option value="" disabled>Select location</option>
-                                                    <option value="lakeside">Lakeside</option>
-                                                    <option value="pokhara-bazar">Pokhara Bazar</option>
-                                                    <option value="baglung">Baglung</option>
-                                                    <option value="bindhabasini">Bindhabasini</option>
-                                                    <option value="chhorepatan">Chhorepatan</option>
-                                                    <option value="damside">Damside</option>
-                                                    <option value="patan">Patan</option>
-                                                    <option value="prithvi-nagar">Prithvi Nagar</option>
-                                                    <option value="rampur">Rampur</option>
-                                                    <option value="sarangkot">Sarangkot</option>
-                                                    <option value="tal-barahi">Tal Barahi</option>
-                                                    <option value="tashi">Tashi</option>
-                                                    <option value="thamel">Thamel</option>
-                                                    <option value="tonk">Tonk</option>
-                                                    <option value="ward-no-1">Ward No 1</option>
-                                                    <option value="ward-no-2">Ward No 2</option>
-                                                </select>
-                                                {errors.location && <p className='text-red-700 text-xs font-semibold mt-1'>{errors.location.message}</p>}
-                                            </div>
-
-                                            <div className="max-w-[200px] mt-1">
-                                                <label htmlFor="parking" className="block text-sm font-medium text-gray-700 mb-1">Parking (number of cars or if bike then it will be 1)</label>
-                                                <input
-                                                    defaultValue={0}
-                                                    className='border-[1px] border-gray-300 focus:border-brand-blue rounded-md bg-white placeholder:text-sm p-2 w-full'
-                                                    min={0} max={10}
-                                                    type="number"
-                                                    name="parking"
-                                                    id="parking"
-                                                    {...register('parking', { required: 'This field is required*' })}
-                                                />
-                                                {errors.parking && <p className='text-red-700 text-xs font-semibold mt-1'>{errors.parking.message}</p>}
-                                            </div>
                                         </div>
+
 
 
                                         <div className="additional_feature mt-3">
                                             <p className='font-heading text-black'>Additional Information</p>
-                                            <div className="max-w-[200px] mt-1">
-                                                <label htmlFor="condition" className="block text-sm font-medium text-gray-700 mb-1">Overall condition (1 = worst, 5 = good, 10 = excellent)</label>
-                                                <input
-                                                    defaultValue={1}
-                                                    className='border-[1px] border-gray-300 focus:border-brand-blue rounded-md bg-white placeholder:text-sm p-2 w-full'
-                                                    min={1} max={10}
-                                                    type="number"
-                                                    name="condition"
-                                                    id="condition"
-                                                    {...register('condition', { required: 'This field is required*' })}
-                                                />
-                                                {errors.condition && <p className='text-red-700 text-xs font-semibold mt-1'>{errors.condition.message}</p>}
-                                            </div>
-                                            <div className="max-w-[200px] mt-2">
-                                                <label htmlFor="housetype" className="block text-sm font-medium text-gray-700 mb-1">House Type</label>
-                                                <select
-                                                    className='border-[1px] border-gray-300 focus:border-brand-blue rounded-md bg-white py-1 px-2 w-full'
-                                                    name="housetype"
-                                                    id="housetype"
-                                                    {...register('housetype', { required: 'Required' })}>
-                                                    <option value="" disabled>Select type</option>
-                                                    <option value="1">Apartment</option>
-                                                    <option value="2">Villa</option>
-                                                    <option value="3">House</option>
-                                                    <option value="4">Townhouse</option>
-                                                    <option value="5">Studio</option>
-                                                </select>
-                                                {errors.housetype && <p className='text-red-700 text-xs font-semibold mt-1'>{errors.housetype.message}</p>}
-                                            </div>
-
-                                            <div className="max-w-[200px] mt-2">
-                                                <label htmlFor="direction" className="block text-sm font-medium text-gray-700 mb-1">Direction</label>
-                                                <select
-                                                    className='border-[1px] border-gray-300 focus:border-brand-blue rounded-md bg-white placeholder:text-sm py-1 px-2 w-full'
-                                                    name="direction"
-                                                    id="direction"
-                                                    {...register('direction', { required: 'This field is required*' })}
-                                                >
-                                                    <option value="" disabled>Select direction</option>
-                                                    <option value="east">East</option>
-                                                    <option value="west">West</option>
-                                                    <option value="north">North</option>
-                                                    <option value="south">South</option>
-                                                </select>
-                                                {errors.direction && <p className='text-red-700 text-xs font-semibold mt-1'>{errors.direction.message}</p>}
-                                            </div>
                                             <div className="form-control">
-
+                                                <label className="label cursor-pointer flex items-center justify-start gap-2">
+                                                    <input
+                                                        id='parking'
+                                                        type="checkbox"
+                                                        name='parking'
+                                                        className="checkbox w-5 h-5 border-gray-400 rounded-full checked:bg-brand-blue"
+                                                        {...register('parking')}
+                                                    />
+                                                    <span className="label-text font-medium" >Parking</span>
+                                                </label>
                                                 <label className="label cursor-pointer flex items-center justify-start gap-2">
                                                     <input
                                                         id='furnished'
@@ -526,9 +357,6 @@ const CreatePost = () => {
 
                                 {/* === Image Uploading Section Start Here === */}
                                 <div>
-
-                                    <div> <MapComponent onLocationSelect={handleLocationSelect} /></div>
-
                                     <p className='font-content text-[16px] mb-3 font-normal text-black'>
                                         <span className='font-semibold mr-1'>Note:</span>
                                         First image will be cover image (max:6)
@@ -549,9 +377,6 @@ const CreatePost = () => {
                                             }
                                         </button>
                                     </div>
-
-
-
                                     <div>
                                         {
                                             formData.imgUrl.length > 0 && formData.imgUrl.map((imgSrc, index) => {
@@ -566,17 +391,6 @@ const CreatePost = () => {
                                                 )
                                             })
                                         }
-
-                                        <div className="post_btn mt-7">
-                                            <button
-                                                type='button'
-                                                onClick={handlePredict}
-                                                className="w-full bg-green-500 text-xl tracking-wider font-heading rounded-md hover:opacity-90 duration-300 text-white p-3">
-                                                Predict Price
-                                            </button>
-                                        </div>
-
-
                                         <div className="post_btn mt-7">
                                             <button
 
@@ -592,11 +406,6 @@ const CreatePost = () => {
                                 </div>
                             </div>
                         </form>
-                        {prediction !== null && (
-                            <div>
-                                <h2>Predicted Price: NPR {prediction.toFixed(2)}</h2>
-                            </div>
-                        )}
                     </div>
                 </div>
                 <ToastContainer />
