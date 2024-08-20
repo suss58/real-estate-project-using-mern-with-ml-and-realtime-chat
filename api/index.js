@@ -14,6 +14,8 @@ import notificatonRoute from "./routes/notification.route.js";
 import path from "path";
 import http from "http";
 import { Server } from "socket.io";
+import { exec } from 'child_process';
+
 
 const app = express();
 app.use(express.json());
@@ -61,6 +63,34 @@ app.use("/api/posts", postRouter);
 app.use("/api/message", messageRouter);
 app.use("/api/conversation", conversationRoute);
 app.use("/api/notification", notificatonRoute);
+
+
+
+
+// Prediction route
+app.post('/api/predict', (req, res) => {
+    const data = req.body;
+
+    if (!data) {
+        return res.status(400).json({ error: 'No data provided' });
+    }
+
+    const dataString = JSON.stringify(data);
+
+    exec(`python3 /home/sushil/GharKhoji/api/utils/predict.py '${dataString}'`, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`exec error: ${error}`);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+        if (stderr) {
+            console.error(`stderr: ${stderr}`);
+            return res.status(500).json({ error: 'Error processing data' });
+        }
+
+        const prediction = parseFloat(stdout.trim());
+        res.json({ prediction });
+    });
+});
 
 //============== Deployment==============//
 
