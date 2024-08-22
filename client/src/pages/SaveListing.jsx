@@ -1,7 +1,5 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
 import ListingCard from '../components/ListingCard'
-import { FaArrowRight } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import Footer from '../components/Footer'
 

@@ -62,34 +62,6 @@ app.use("/api/message", messageRouter);
 app.use("/api/conversation", conversationRoute);
 app.use("/api/notification", notificatonRoute);
 
-//============== Deployment==============//
-
-const __dirname = path.resolve();
-
-if (process.env.NODE_ENV === "production") {
-  const staticFilesPath = path.join(__dirname, "client", "dist");
-  app.use(express.static(staticFilesPath));
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(staticFilesPath, "index.html"));
-  });
-} else {
-  app.get("/", (req, res) => {
-    res.send("api listing...");
-  });
-}
-
-//============== Deployment==============//
-
-// Handle middleware
-app.use((err, req, res, next) => {
-  const statusCode = err.statusCode || 500;
-  const message = err.message || "Internal Server Error";
-  return res.status(statusCode).json({
-    success: false,
-    statusCode,
-    message,
-  });
-});
 
 
 
@@ -103,8 +75,6 @@ export const io = new Server(expressServer, {
   cors: {
     origin: [
       "http://localhost:5173",
-      "https://property-sell.vercel.app",
-      "https://property-sell-gjz462ec1-emoncr.vercel.app/",
     ],
     credentials: true,
   },

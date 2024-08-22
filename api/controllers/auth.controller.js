@@ -128,7 +128,9 @@ export const verifyOtp = async (req, res, next) => {
     if (!user) {
       return next(throwError(404, 'User not found'));
     }
-
+    if(user.otp!=otp){
+      return next(throwError(404,'Invalid Otp'))
+    }
     // Hash the new password
     const hashedPassword = bcrypt.hashSync(newPassword, 8);
     user.password = hashedPassword;

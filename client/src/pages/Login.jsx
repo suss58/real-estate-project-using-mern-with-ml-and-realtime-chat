@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Singup from '../components/Singup';
 import SingIn from '../components/SingIn';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import OAuth from '../components/OAuth';
-import Footer from '../components/Footer';
+
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
     const { currentUser } = useSelector(state => state.user);
@@ -15,7 +15,7 @@ const Login = () => {
     const [responseData, setResponseData] = useState();
     const navigate = useNavigate();
 
-    //======handling Notification for user =====//
+    // Handling Notification for User
     const handleTostify = async () => {
         if (responseData.success) {
             setIsNewUser(!isNewUser);
@@ -38,61 +38,65 @@ const Login = () => {
         }
     }, [currentUser, navigate]);
 
-    const handleForgotPasswordClick = () => {
+    const handleForgotPasswordClick = (e) => {
+        e.preventDefault();
         navigate('/forget');
     };
 
+    const handleToggleUserType = (e) => {
+        e.preventDefault();
+        setIsNewUser(!isNewUser);
+    };
+
     return (
-        <>
-            {
-                currentUser && currentUser.email
-                    ?
-                    <section className='form-section py-20'>
-                        <div className="container">
-                            <p className='text-base md:text-xl text-center text-brand-blue font-heading font-bold'>User exists! Redirecting to profile page</p>
-                        </div>
-                    </section>
-                    :
-                    <section className='form-section py-10 md:py-20'>
-                        <div className="container">
-                            <div className="form-container px-4 sm:px-8 bg-white py-6 pb-8 sm:py-9 sm:pb-12 max-w-lg mx-auto rounded-sm border-[1px] border-brand-blue/50 shadow-brand shadow-brand-blue/40">
-                                <h1 className='text-left text-brand-blue mb-3 font-medium font-heading text-md sm:text-xl'>
-                                    {isNewUser ? "Login" : 'Create an account'}
-                                </h1>
-                                {
-                                    isNewUser ?
-                                        <SingIn />
-                                        :
-                                        <Singup userState={{ setResponseData, setIsformSubmit }} />
-                                }
+        <div className="font-sans bg-gray-50 flex items-center justify-center min-h-screen p-6">
+            <div className="max-w-4xl w-full lg:flex rounded-lg shadow-lg overflow-hidden">
+                {/* Image Section */}
+                <div className="hidden lg:block lg:w-1/2 bg-cover bg-center" 
+                    style={{ backgroundImage: "url('https://readymadeui.com/signin-image.webp')" }}>
+                </div>
 
-                                <p className="content text-center font-heading text-black mt-4">
-                                    {isNewUser ? "Don’t have an account?" : 'Already have an account?'}
-                                    <u className='ml-1 border-brand-blue text-brand-blue cursor-pointer'
-                                        onClick={() => setIsNewUser(!isNewUser)}
-                                    >
-                                        {isNewUser ? 'Create an account' : 'Login'}
-                                    </u>
+                {/* Form Section */}
+                <div className="w-full lg:w-1/2 p-6 lg:p-12 bg-white">
+                    {currentUser && currentUser.email ? (
+                        <div className='form-section text-center'>
+                            <p className='text-xl font-semibold text-blue-600'>
+                                User exists! Redirecting to profile page...
+                            </p>
+                        </div>
+                    ) : (
+                        <div className='form-section'>
+                            <h1 className='text-2xl font-bold text-blue-600 mb-6'>
+                                {isNewUser ? "Login" : 'Create an Account'}
+                            </h1>
+                            {isNewUser ? (
+                                <SingIn />
+                            ) : (
+                                <Singup userState={{ setResponseData, setIsformSubmit }} />
+                            )}
+
+                            <p className="text-center text-gray-700 mt-4">
+                                {isNewUser ? "Don’t have an account?" : 'Already have an account?'}
+                                <a href="/" onClick={handleToggleUserType} className='ml-2 text-blue-600 font-semibold'>
+                                    {isNewUser ? 'Create one' : 'Login'}
+                                </a>
+                            </p>
+
+                            {isNewUser && (
+                                <p className="text-center text-gray-700 mt-4">
+                                    <a href="/" onClick={handleForgotPasswordClick} className='text-blue-600 font-semibold'>
+                                        Forgot Password?
+                                    </a>
                                 </p>
+                            )}
 
-                                {isNewUser && (
-                                    <p className="content text-center font-heading text-black mt-4">
-                                        <u className='ml-1 border-brand-blue text-brand-blue cursor-pointer'
-                                            onClick={handleForgotPasswordClick}
-                                        >
-                                            Forgot Password?
-                                        </u>
-                                    </p>
-                                )}
-
-                                <OAuth />
-                                <ToastContainer limit={0} />
-                            </div>
+                            <OAuth />
                         </div>
-                    </section>
-            }
-            <Footer />
-        </>
+                    )}
+                    <ToastContainer limit={1} />
+                </div>
+            </div>
+        </div>
     );
 };
 

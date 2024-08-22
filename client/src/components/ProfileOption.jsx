@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { signoutFailed, signoutSuccess } from '../redux/user/userSlice';
@@ -36,13 +36,13 @@ const ProfileOption = ({ user }) => {
 
     return (
         <div className="flex-none gap-2">
-            <div className="dropdown dropdown-end">
+            <div className="dropdown dropdown-end ">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar hover:outline-0 hover:border-0">
                     <div className="w-7 rounded-full">
                         <img className='rounded-full border border-brand-blue/20 h-8 w-8 object-cover' src={user.avatar} alt="profile image" />
                     </div>
                 </label>
-                <ul tabIndex={0} className="mt-3 z-[999999999] font-heading p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-md w-52 ">
+                <ul tabIndex={0} className="mt-3 bg-white z-[999999999] font-heading p-2 shadow menu menu-sm dropdown-content  rounded-md w-52 ">
                     <li>
                         <Link to={'/profile'} className="justify-start text-brand-blue">
                             <FaUser className='text-brand-blue' /> Profile

@@ -1,5 +1,5 @@
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { firebaseApp } from '../firebase';
 import { ToastContainer, toast } from 'react-toastify';
 import { useForm } from 'react-hook-form'

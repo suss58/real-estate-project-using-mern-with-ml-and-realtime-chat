@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import { useState } from 'react'
 import { BsJustifyRight, BsMessenger, BsSearch } from 'react-icons/bs'
 import { Link, useNavigate } from 'react-router-dom'
 import MobileMenu from './mobileMenu'
@@ -38,7 +38,7 @@ const Header = () => {
                         <h1 className="font-blach sm:text-xl text-sm text-left hover:bg-transparent uppercase text-brand-blue tracking-tighter w-full font-heading font-bold flex items-center justify-start">
                             <Link to={'/home'} className='flex items-center justify-start'>
                                 <img className='w-8 h-8' src="https://img.icons8.com/sf-black-filled/64/313a67/home.png" alt="logo" />
-                                <span className='hidden sm:block'>Property Sale</span>
+                                <span className='hidden sm:block'>GharKhoji</span>
                             </Link>
                         </h1>
 
@@ -103,9 +103,7 @@ const Header = () => {
                         </ul>
 
                         <div className="nav_mobile flex items-center justify-center sm:hidden gap-1">
-                            {/* User Profile Image  */}
-                            {/* {currentUser && <Profile user={currentUser} />} */}
-
+            
                             <Link to={`${currentUser ? "/message" : "/login"}`} className='mr-1 text-lg  text-brand-blue'>
                                 <span className='relative'>
                                     <BsMessenger className='z-10' />
@@ -124,7 +122,7 @@ const Header = () => {
                                 onClick={() => setisActiveMoblie(!isActiveMoblie)}
                             >
                                 {
-                                    isActiveMoblie ? <MdOutlineClose className='text-red-600 font-bold' /> : <BsJustifyRight className='text-brand-blue' />
+                                    isActiveMoblie ? <MdOutlineClose className='text-red-600 font-bold' /> : <BsJustifyRight className='text-brand-blue ' />
                                 }
 
                             </button>

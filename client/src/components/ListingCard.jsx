@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { FaBath, FaBed, FaChartArea, FaBookmark  , FaLocationArrow, } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
