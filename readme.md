@@ -34,33 +34,55 @@ This project is a comprehensive real estate platform that features a real-time c
 ```bash
 git clone https://github.com/yourusername/real-estate-platform.git
 cd real-estate-platform
-
 Install Dependencies
 Backend (API)
 Navigate to the api directory:
-
+bash
+Copy code
 cd api
 Install Node.js dependencies:
-
+bash
+Copy code
 npm install
 Create a Python virtual environment:
-
+bash
+Copy code
 python -m venv venv
 Activate the virtual environment:
 On Windows:
+bash
+Copy code
 venv\Scripts\activate
-
 On macOS/Linux:
+bash
+Copy code
 source venv/bin/activate
-
-Install Python dependencies
+Install Python dependencies:
+bash
+Copy code
+pip install -r requirements.txt
 Set up the .env file with your credentials.
-
 Frontend (Client)
 Navigate to the client directory:
+bash
+Copy code
 cd ../client
-
 Install Node.js dependencies:
+bash
+Copy code
 npm install
+Set up the .env file with your credentials.
+Running the Project
+Start the backend (API):
 
+bash
+Copy code
+cd ../api
+npm start
+Start the frontend (Client):
 
+bash
+Copy code
+cd ../client
+npm start
+Open your browser and navigate to http://localhost:3000 to access the platform.
