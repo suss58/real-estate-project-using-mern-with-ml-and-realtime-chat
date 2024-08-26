@@ -1,4 +1,6 @@
-# Real Estate Platform with House Price Prediction
+
+
+# Real Estate Platform with House Price Prediction and real time chat system using MERN stack
 
 ## Overview
 
@@ -18,7 +20,7 @@ This project is a comprehensive real estate platform that features a real-time c
 - **Database:** MongoDB
 - **Machine Learning:** Python, with models trained using techniques such as LightGBM and XGBoost
 - **Real-Time Communication:** Socket.io for real-time chat functionality
-- **Deployment:** Deployed using cloud services to ensure high availability and performance
+
 
 ## Installation
 
@@ -27,62 +29,115 @@ This project is a comprehensive real estate platform that features a real-time c
 - Node.js and npm installed
 - Python and `venv` for creating a virtual environment
 - MongoDB instance running (local or cloud)
+- firebase for authentication
 - `.env` files with necessary credentials for both the frontend and backend
 
 ### Clone the Repository
 
+To get started, clone the repository to your local machine:
+
 ```bash
-git clone https://github.com/yourusername/real-estate-platform.git
-cd real-estate-platform
-Install Dependencies
-Backend (API)
-Navigate to the api directory:
-bash
-Copy code
-cd api
-Install Node.js dependencies:
-bash
-Copy code
-npm install
-Create a Python virtual environment:
-bash
-Copy code
-python -m venv venv
-Activate the virtual environment:
-On Windows:
-bash
-Copy code
-venv\Scripts\activate
-On macOS/Linux:
-bash
-Copy code
-source venv/bin/activate
-Install Python dependencies:
-bash
-Copy code
-pip install -r requirements.txt
-Set up the .env file with your credentials.
-Frontend (Client)
-Navigate to the client directory:
-bash
-Copy code
-cd ../client
-Install Node.js dependencies:
-bash
-Copy code
-npm install
-Set up the .env file with your credentials.
-Running the Project
-Start the backend (API):
+git clone https://github.com/suss58/Gharkhoji-Real-Estate-web-app-with-house-price-prediction-and-real-time-chat-features.git
+```
 
-bash
-Copy code
-cd ../api
-npm start
-Start the frontend (Client):
+### Install Dependencies
 
-bash
-Copy code
-cd ../client
-npm start
-Open your browser and navigate to http://localhost:3000 to access the platform.
+#### Backend (API)
+
+1. **Navigate to the `api` directory:**
+
+    ```bash
+    cd api
+    ```
+
+2. **Install Node.js dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+3. **Create a Python virtual environment:**
+
+    ```bash
+    python -m venv venv
+    ```
+
+4. **Activate the virtual environment:**
+    - On Windows:
+
+        ```bash
+        venv\Scripts\activate
+        ```
+    - On macOS/Linux:
+
+        ```bash
+        source venv/bin/activate
+        ```
+
+5. **Install Python dependencies:**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+6. Set up the `.env` file with your credentials.NODE_ENV, 
+PORT, 
+MONGO cluster url, 
+JWT_SECRET, 
+EMAIL_USER, 
+EMAIL_PASS. 
+
+
+#### Frontend (Client)
+
+1. **Navigate to the `client` directory:**
+
+    ```bash
+    cd ../client
+    ```
+
+2. **Install Node.js dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+
+### Running the Project
+
+1. **Start the backend (API):**
+
+    ```bash
+    cd ../api
+    npm start
+    ```
+
+2. **Start the frontend (Client):**
+
+    ```bash
+    cd ../client
+    npm start
+    ```
+
+3. **Open your browser and navigate to** [http://localhost:3000](http://localhost:3000) **to access the platform.**
+
+## Contributing
+
+If you want to contribute to this project, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/YourFeature`).
+3. Commit your changes (`git commit -am 'Add some feature'`).
+4. Push to the branch (`git push origin feature/YourFeature`).
+5. Create a new Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgements
+
+- Thanks to the creators of the technologies used in this project.
+- Special thanks to our contributors and testers:
+  - [Bishwo Subedi](https://github.com/BishwoSubedi)
+  - [Ranjit Poudel](https://github.com/RpRanjit)
