@@ -53,7 +53,7 @@ Here are some images showcasing the project:
 To get started, clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/suss58/Gharkhoji-Real-Estate-web-app-with-house-price-prediction-and-real-time-chat-features.git
+git clone https://github.com/suss58/Gharkhoji--Real-estate-web-application-with-real-time-chat-system-and-house-price-prediction-system.git
 ```
 
 ### Install Dependencies
