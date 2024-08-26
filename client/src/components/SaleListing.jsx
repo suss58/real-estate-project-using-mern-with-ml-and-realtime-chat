@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import ListingCard from '../components/ListingCard'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -99,7 +99,8 @@ const SaleListing = () => {
             >
                 <div className="content">
                     <h2 className='text-3xl font-bold sm:text-5xl font-heading  text-brand-blue sm:text-left '>
-                        Explore Our Sale Post
+                       Explore Our Exclusive
+                        <span className=" text-yellow-500 px-1 pb-1"> Sale Event !</span>
                     </h2>
                     <p className='font-content font-medium text-sm sm:text-lg mt-3 max-w-3xl'>
                         Step into our Sale Event and discover an array of incredible offers waiting for you! Unleash your shopping desires with discounts on a wide range of products. Embrace the savings—start shopping now!

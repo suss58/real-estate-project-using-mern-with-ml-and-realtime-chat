@@ -21,3 +21,5 @@ node_modules
 *.sln
 *.sw?
 .env
+
+client/src/firebase.js

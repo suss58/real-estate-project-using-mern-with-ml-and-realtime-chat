@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { io } from "socket.io-client"
 import { setNotification, setSingleNotification } from "../redux/notifications/notificationSlice"

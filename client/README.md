@@ -1,3 +1,2 @@
 Hi There ! 
-
-This is a real estate application 
+this is gharkhoji realstate app with machine learning integration

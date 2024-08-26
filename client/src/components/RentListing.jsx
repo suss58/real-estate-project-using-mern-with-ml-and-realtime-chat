@@ -98,7 +98,9 @@ const RentListing = () => {
             >
                 <div className="content">
                     <h2 className='text-3xl font-bold sm:text-5xl font-heading  text-brand-blue sm:text-left '>
-                        Explore Our Rental Listings
+                        Explore Our Exclusive 
+                        <span className=" text-green-500 px-1 pb-1"> Rental Listings !</span>
+
                     </h2>
                     <p className='font-content  font-medium text-sm sm:text-lg mt-3 max-w-3xl'>
                         Discover our Rental Showcase! Step into a world of diverse properties waiting for you. Embrace the possibilities of comfortable living spaces and find your perfect rental match. Start exploring your next home now!

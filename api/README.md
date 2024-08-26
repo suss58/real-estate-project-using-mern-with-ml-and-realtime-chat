@@ -1,6 +1,3 @@
-LIVE_URL: https://property-sell.vercel.app/
-
-Excited to announce the completion of my latest project, 'Property Sale'! 🏡 Built on MERN stack with real-time chat functionality using Socket.io. A platform where you can buy, sell, or rent properties.
 
 Here is the overview of the project.
 
@@ -10,6 +7,7 @@ Backend - Node Js, Express Js, Socket Io, Mongoose, Jwt.
 Database - Mongodb.
 
 Fronted - React Js, React Router Dom, React Hook Form, Firebase, Tailwind Css, Socket Io Client.
+Machine learning: Python
 
 
 Features: 🚀
@@ -19,7 +17,5 @@ Features: 🚀
 4. Authentication with google or email.
 5. Property Image upload facilities.
 6. Pagination for all posts.
-
-Ahhh😪...there are many more features here is live url and don't forget to check it out.
-
-Live URL - https://property-sell.vercel.app/
+7. Forget password feature with nodemailer
+8.House Price prediction feature using machine learing algorithm

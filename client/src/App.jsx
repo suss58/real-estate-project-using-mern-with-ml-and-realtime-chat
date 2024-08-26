@@ -12,7 +12,8 @@ import Search from './pages/Search'
 import Message from './pages/Message'
 import SocketConnection from './components/SocketConnection'
 import ForgotPassword from './pages/ForgetPassword'
-
+import AboutUs from './components/AboutUs'
+import Team from './pages/Team'
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
           <Route path='/forget' element={<ForgotPassword/>} />
           <Route path='/listing/:id' element={<ListingPage />} />
           <Route path='/search?' element={<Search />} />
+          <Route path='/about' element={<AboutUs/>} />
+          <Route path='/team' element={<Team/>} />
 
           {/* /---------Private Routes-----------/ */}
           <Route element={<PrivateRoute />}>

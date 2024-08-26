@@ -59,7 +59,6 @@ export const singlePost = async (req, res, next) => {
 };
 
 //====GET LISTING Post ====//
-
 export const getListingPost = async (req, res, next) => {
   try {
     const searchTerm = req.query.searchTerm || "";
@@ -67,6 +66,8 @@ export const getListingPost = async (req, res, next) => {
     const offer = req.query.offer || "";
     const parking = req.query.parking || "";
     const furnished = req.query.furnished || "";
+    const minPrice = req.query.minPrice || "";
+    const maxPrice = req.query.maxPrice || "";
     const page = req.query.page || 1;
 
     const query = {
@@ -88,6 +89,12 @@ export const getListingPost = async (req, res, next) => {
     }
     if (furnished === "true") {
       query.furnished = true;
+    }
+    if (minPrice) {
+      query.price = { ...query.price, $gte: parseFloat(minPrice) };
+    }
+    if (maxPrice) {
+      query.price = { ...query.price, $lte: parseFloat(maxPrice) };
     }
 
     const limit = 12;

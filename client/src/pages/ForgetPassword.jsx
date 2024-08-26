@@ -9,7 +9,10 @@ const ForgotPassword = () => {
   const [stage, setStage] = useState("request");
   const [timer, setTimer] = useState(180);
   const [message, setMessage] = useState("");
+  const [passwordError, setPasswordError] = useState(""); // Added state for password error
   const navigate = useNavigate();
+
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // Regular expression for password validation
 
   useEffect(() => {
     let interval;
@@ -51,11 +54,31 @@ const ForgotPassword = () => {
     }
   };
 
+  const handlePasswordChange = (e) => {
+    const password = e.target.value;
+    setNewPassword(password);
+
+    // Validate password using regex
+    if (!passwordRegex.test(password)) {
+      setPasswordError(
+        "Password must be at least 8 characters long and include both letters and numbers."
+      );
+    } else {
+      setPasswordError(""); // Clear error message if password is valid
+    }
+  };
+
   const handleVerifyOtp = async (event) => {
-    event.preventDefault(); // Prevents default form submission
+    event.preventDefault();
 
     if (!otp || !newPassword) {
       setMessage("Please enter OTP and new password");
+      return;
+    }
+
+    // Check if there's a password error before proceeding
+    if (passwordError) {
+      setMessage("Please fix the password error before proceeding.");
       return;
     }
 
@@ -126,9 +149,11 @@ const ForgotPassword = () => {
                 <input
                   type="password"
                   value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
+                  onChange={handlePasswordChange} // Updated to use handlePasswordChange
                   placeholder="Enter new password"
-                  className="w-full text-[1.35rem] border-b bg-white border-gray-300 focus:border-blue-600 px-2 py-3 outline-none mb-6"
+                  className={`w-full text-[1.35rem] border-b bg-white ${
+                    passwordError ? "border-red-500" : "border-gray-300"
+                  } focus:border-blue-600 px-2 py-3 outline-none mb-2`}
                 />
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -140,6 +165,9 @@ const ForgotPassword = () => {
                   <path d="M64 104C22.127 104 1.367 67.496.504 65.943a4 4 0 0 1 0-3.887C1.367 60.504 22.127 24 64 24s62.633 36.504 63.496 38.057a4 4 0 0 1 0 3.887C126.633 67.496 105.873 104 64 104zM8.707 63.994C13.465 71.205 32.146 96 64 96c31.955 0 50.553-24.775 55.293-31.994C114.535 56.795 95.854 32 64 32 32.045 32 13.447 56.775 8.707 63.994zM64 88c-13.234 0-24-10.766-24-24s10.766-24 24-24 24 10.766 24 24-10.766 24-24 24zm0-40c-8.822 0-16 7.178-16 16s7.178 16 16 16 16-7.178 16-16-7.178-16-16-16z"></path>
                 </svg>
               </div>
+              {passwordError && (
+                <p className="text-red-500 text-sm mb-2">{passwordError}</p>
+              )}
               <button
                 onClick={handleVerifyOtp}
                 className="w-full py-2.5 px-10 text-sm font-semibold rounded-md text-white bg-brand-blue hover:bg-blue-700 focus:outline-none transition-transform transform hover:scale-105"

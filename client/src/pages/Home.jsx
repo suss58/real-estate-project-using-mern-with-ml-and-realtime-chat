@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import SaleListing from '../components/SaleListing';
 import RentListing from '../components/RentListing';
 import OfferedListing from '../components/OfferedListing';
-import HomepageImage from '../assets/Homepage.jpg'; // Import the new image
+import HomepageImage from '../assets/Homepage3.webp'; // Import the new image
 
 const Home = () => {
     const navigate = useNavigate();
@@ -13,7 +13,7 @@ const Home = () => {
         <>
             <section
                 style={{
-                    height:"130vh",
+                    height:'100vh',
                     backgroundImage: `url(${HomepageImage})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
@@ -30,17 +30,16 @@ const Home = () => {
                 >
                     <div className="max-w-xl text-center sm:text-left">
                         <h1 className="text-3xl font-extrabold sm:text-5xl xl:text-6xl font-heading text-white sm:text-left">
-                            Let us find your
+                          Discover Your Dream 
 
-                            <strong className="block font-extrabold bg-white mt-2 text-brand-blue max-w-xs mx-auto sm:ml-0 sm:mr-auto sm:max-w-md font-oswald uppercase sm:text-left xl:max-w-3xl">
-                                Forever Home.
+                            <strong className="block font-extrabold bg-blue-300 mt-2 text-brand-blue max-w-xs mx-auto sm:ml-0 sm:mr-auto sm:max-w-md font-oswald uppercase sm:text-left xl:max-w-3xl">
+                              Home With Us
                             </strong>
                         </h1>
 
-                        <p className="mt-4 max-w-md sm:text-md font-content text-white">
-                            Welcome to our home listings designed for you. Explore to find your perfect match. We're here to make finding your dream home a smooth, enjoyable experience.
-                        </p>
-
+                        {/* <p className="mt-4 max-w-md sm:text-md font-content text-yellow-400">
+                        Experience the future of home buying with Gharkhoji. Our advanced price prediction technology empowers informed decisions, while curated listings help you find your perfect home with confidence. Gharkhoji makes your journey smart, seamless, and insightful.
+                        </p> */}
                         <div className="mt-8 flex flex-wrap gap-4 text-center">
                             <button
                                 onClick={() => navigate('/search')}
@@ -64,7 +63,7 @@ const Home = () => {
             <OfferedListing />
 
             {/* Announcement Section */}
-            <section className='bg-brand-blue'>
+            <section className='bg-blue-700'>
                 <div
                     className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8"
                 >
@@ -95,7 +94,7 @@ const Home = () => {
                                 <span className="text-sm font-medium transition-all group-hover:me-4">
                                     Let us Sell Now!
                                 </span>
-                            </button>
+                            </button> 
                         </div>
                     </div>
                 </div>

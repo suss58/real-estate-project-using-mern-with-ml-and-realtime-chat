@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import  { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -14,7 +14,7 @@ const markerIcon = L.icon({
 
 const MapComponent = ({ onLocationSelect, defaultLocation }) => {
     const mapRef = useRef(null);
-    const [location, setLocation] = useState(defaultLocation || { lat: 27.7172, lng: 85.3240 });
+    const [location, setLocation] = useState(defaultLocation || { lat: 28.209630467376773, lng: 83.98559757010933 });
 
     useEffect(() => {
         // Initialize the map

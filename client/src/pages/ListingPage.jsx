@@ -24,6 +24,7 @@ import {
   handleSave,
 } from "../redux/saveListing/saveListingSlice";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import 'leaflet/dist/leaflet.css';
 import L from "leaflet";
 
 const ListingPage = () => {
@@ -43,8 +44,14 @@ const ListingPage = () => {
     parking,
     price,
     title,
+    builtyear,
+    Road,
+    condition,
+    housetype,
+    living,
+    BHK,
     type,
-    _id,
+     _id,
     userRef,
   } = listings;
 
@@ -77,7 +84,7 @@ const ListingPage = () => {
         setListings(json);
         setLoading(false);
 
-        const _id = json._id; // Assuming _id is part of the response
+        const _id = json._id; 
         if (_id) {
           const isSaved = saveListings.some(
             (saveListing) => saveListing._id === _id
@@ -96,7 +103,7 @@ const ListingPage = () => {
 
   const lat = listings.location?.lat;
   const lng = listings.location?.lng;
-  console.log(lat, lng);
+
 
   //====SLider Functions=====//
   function SamplePrevArrow({ onClick }) {
@@ -190,6 +197,31 @@ const ListingPage = () => {
     }
   };
 
+
+  //for parking 
+  const getParkingDescription = (parking) => {
+    if (parking === 0) {
+      return "No Parking Space";
+    } else if (parking === 1) {
+      return "1 Bike or 1 Car parking space";
+    }else {
+      return `${parking} Car parking spaces`;
+    }
+  };
+
+  //for condtition 
+  const getOverallCondition = (condition) => {
+    if (condition === 0) {
+      return "House is in very poor condition and requires extensive repairs.";
+    } else if (condition >= 1 && condition <= 5) {
+      return "House is in good condition but could benefit from some improvements.";
+    } else if (condition >= 6 && condition <= 8) {
+      return "House is in better condition, well-maintained with minor improvements needed.";
+    } else {
+      return "House is in excellent condition, ready for immediate use.";
+    }
+  };
+
   return (
     <>
       {loading ? (
@@ -248,9 +280,9 @@ const ListingPage = () => {
 
                       {offer ? (
                         <p className="text-2xl font-heading text-brand-blue mt-5  text-bold">
-                          ${discountPrice}{" "}
+                          Rs.{discountPrice}{" "}
                           <span>
-                            <s className="text-gray-400 text-sm">${price}</s>
+                            <s className="text-gray-400 text-sm">RS.{price}</s>
                           </span>
                         </p>
                       ) : (
@@ -301,12 +333,12 @@ const ListingPage = () => {
                         isFeatureActive ? "max-h-screen" : "max-h-0"
                       } overflow-hidden duration-500 ease-in-out`}
                     >
-                      <div className="info_contaier mt-5 max-w-md ">
+                      <div className="info_container  mt-5 max-w-md ">
                         <div className="grid grid-cols-2">
                           <p className="font-heading text-md lg:text-lg ">
                             Bedrooms
                           </p>
-                          <p className="font-heading  text-md lg:text-lg ">
+                          <p className="font-heading text-black text-md lg:text-lg ">
                             {bed}
                           </p>
                         </div>
@@ -314,15 +346,17 @@ const ListingPage = () => {
                           <p className="font-heading text-md lg:text-lg ">
                             BathRoom
                           </p>
-                          <p className="font-heading  text-md lg:text-lg ">
+                          <p className="font-heading text-black text-md lg:text-lg ">
                             {bath}
                           </p>
                         </div>
-                        <div className="grid grid-cols-2 mt-2">
-                          <p className="font-heading text-md lg:text-lg ">
+                        <div className="grid grid-cols-2 mt-3">
+                          <p className="font-heading text-md  lg:text-lg ">
                             Parking
                           </p>
-                          {parking}
+                          <p className="font-heading  text-black text-md lg:text-lg mb-3">
+                          {getParkingDescription(parking)}
+                          </p>
                         </div>
                         <div className="grid grid-cols-2 mt-2">
                           <p className="font-heading text-md lg:text-lg ">
@@ -340,41 +374,60 @@ const ListingPage = () => {
                           <p className="font-heading text-md lg:text-lg ">
                             Area
                           </p>
-                          <p className="font-heading  text-md lg:text-lg ">
+                          <p className="font-heading text-black text-md lg:text-lg ">
                             {area} <span>sqft</span>
                           </p>
                         </div>
                         <div className="grid grid-cols-2 mt-2">
                           <p className="font-heading text-md lg:text-lg ">
-                            lattitude
+                            Built Year
                           </p>
-                          <p className="font-heading  text-md lg:text-lg ">
-                            {lat}
+                          <p className="font-heading text-black text-md lg:text-lg ">
+                            {builtyear} <span>B.S</span>
                           </p>
                         </div>
                         <div className="grid grid-cols-2 mt-2">
                           <p className="font-heading text-md lg:text-lg ">
-                            longitude
+                            Road Size
                           </p>
-                          <p className="font-heading  text-md lg:text-lg ">
-                            {lng}
+                          <p className="font-heading text-black text-md lg:text-lg ">
+                            {Road} <span>Ft.</span>
                           </p>
                         </div>
-                        {offer && (
-                          <div className="grid grid-cols-2 mt-2">
-                            <p className="font-heading text-md lg:text-lg ">
-                              Price
-                            </p>
-                            <p className="font-heading  text-md lg:text-2xl ">
-                              ${discountPrice}{" "}
-                              <span>
-                                <s className="text-gray-400 text-lg">
-                                  ${price}
-                                </s>
-                              </span>
-                            </p>
-                          </div>
-                        )}
+                        <div className="grid grid-cols-2 mt-2">
+                          <p className="font-heading text-md mt-8 lg:text-lg ">
+                            OverAll Condition
+                          </p>
+                          <p className="font-heading text-black text-md mt-2 mb-4 lg:text-lg ">
+                            {getOverallCondition(condition)}
+                          </p>
+                        </div>
+                        <div className="grid grid-cols-2 mt-2">
+                          <p className="font-heading text-md lg:text-lg ">
+                            House Type
+                          </p>
+                          <p className="font-heading text-black text-md lg:text-lg ">
+                            {housetype}
+                          </p>
+                        </div>
+                        <div className="grid grid-cols-2 mt-2">
+                          <p className="font-heading text-md lg:text-lg ">
+                            Living Rooms
+                          </p>
+                          <p className="font-heading text-black text-md lg:text-lg ">
+                            {living}
+                          </p>
+                        </div>
+                        <div className="grid grid-cols-2 mt-2">
+                          <p className="font-heading text-md lg:text-lg ">
+                           Total No. Of Flats
+                          </p>
+                          <p className="font-heading text-black text-md lg:text-lg ">
+                            {BHK}
+                          </p>
+                        </div>
+                       
+                       
                       </div>
                     </div>
                   </div>
